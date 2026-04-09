@@ -5,7 +5,9 @@
   let original = $state('');
   let modified = $state('');
   let copySuccess = $state(false);
-  let diffResult = $derived(computeDiff(original, modified));
+  let rawDiff = $derived(computeDiff(original, modified));
+  let hasDiff = $derived(original.trim() !== '' && modified.trim() !== '' && rawDiff.changes.length > 0);
+  let diffResult = $derived(rawDiff);
 
   const sampleOriginal = `function greet(name) {
   console.log("Hello, " + name);
@@ -89,7 +91,7 @@ console.log("Done");`;
     <button class="secondary-button" onclick={loadSample}>Load Sample</button>
     <button class="secondary-button" onclick={swapSides}>Swap Sides</button>
     <button class="secondary-button" onclick={clearAll}>Clear</button>
-    {#if diffResult && diffResult.changes.length > 0}
+    {#if hasDiff}
       <button class="primary-button copy-btn" class:success={copySuccess} onclick={copyUnifiedDiff}>
         {copySuccess ? 'Copied!' : 'Copy Unified Diff'}
       </button>
@@ -101,7 +103,7 @@ console.log("Done");`;
   {/if}
 
   <!-- Stats Bar -->
-  {#if diffResult && (original || modified)}
+  {#if hasDiff}
     <div class="stats-bar">
       <span class="stat stat-unchanged">{diffResult.stats.unchanged} unchanged</span>
       <span class="stat stat-added">+{diffResult.stats.added} added</span>
@@ -111,7 +113,7 @@ console.log("Done");`;
   {/if}
 
   <!-- Diff Output -->
-  {#if diffResult && diffResult.changes.length > 0}
+  {#if hasDiff}
     <div class="diff-container">
       <div class="diff-side diff-old">
         <div class="diff-header">Original</div>
@@ -152,7 +154,7 @@ console.log("Done");`;
         {/each}
       </div>
     </div>
-  {:else if !original && !modified}
+  {:else}
     <div class="empty-state">
       Paste text into both sides to see the differences highlighted
     </div>
@@ -163,6 +165,7 @@ console.log("Done");`;
   .tool-container {
     max-width: 1200px;
     margin: 0 auto;
+    overflow: hidden;
   }
 
   .input-grid {
@@ -182,6 +185,7 @@ console.log("Done");`;
     min-height: 180px;
     resize: vertical;
     overflow: auto;
+    box-sizing: border-box;
     font-family: var(--font-mono);
     font-size: 0.8rem;
     line-height: 1.6;

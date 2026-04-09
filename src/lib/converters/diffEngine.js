@@ -140,10 +140,15 @@ function pairModifications(ops) {
  * @returns {{ changes: Array, stats: { added: number, removed: number, modified: number, unchanged: number } }}
  */
 export function computeDiff(original, modified) {
+  const empty = { changes: [], stats: { added: 0, removed: 0, modified: 0, unchanged: 0 } };
+
+  // Return empty when both sides are blank
+  if (!original?.trim() && !modified?.trim()) return empty;
+
   // Input size guard
   const MAX_SIZE = 2_000_000;
   if ((original && original.length > MAX_SIZE) || (modified && modified.length > MAX_SIZE)) {
-    return { changes: [], stats: { added: 0, removed: 0, modified: 0, unchanged: 0 }, error: 'Input too large (max 2MB per side)' };
+    return { ...empty, error: 'Input too large (max 2MB per side)' };
   }
 
   const oldLines = (original || '').split('\n');
