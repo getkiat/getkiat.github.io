@@ -7,7 +7,8 @@
     { id: 'excel-to-markdown', name: 'Excel to Markdown', icon: 'file-text' },
     { id: 'markdown-to-excel', name: 'Markdown to Excel', icon: 'file-export' },
     { id: 'table-converter', name: 'POI Format Transformer', icon: 'table' },
-    { id: 'placeholder-2', name: 'Feature Format Transformer', icon: 'layers' }
+    { id: 'placeholder-2', name: 'Feature Format Transformer', icon: 'layers' },
+    { id: 'diff-compare', name: 'Diff / Text Compare', icon: 'git-compare' }
   ];
 
   // Toggle dark/light mode
@@ -54,6 +55,8 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
           {:else if tool.icon === 'layers'}
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          {:else if tool.icon === 'git-compare'}
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M6 21V9a9 9 0 0 0 9 9"></path><path d="M18 3v6"></path></svg>
           {:else if tool.icon === 'bar-chart'}
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
           {/if}
@@ -171,6 +174,7 @@
   .tool-nav li:nth-child(3) { animation-delay: 80ms; }
   .tool-nav li:nth-child(4) { animation-delay: 120ms; }
   .tool-nav li:nth-child(5) { animation-delay: 160ms; }
+  .tool-nav li:nth-child(6) { animation-delay: 200ms; }
 
   @keyframes sidebarFadeIn {
     from {

@@ -6,6 +6,7 @@
   import ExcelToMarkdownConverter from './components/tools/ExcelToMarkdownConverter.svelte';
   import MarkdownToExcelConverter from './components/tools/MarkdownToExcelConverter.svelte';
   import FeatureFormatTransformer from './components/tools/FeatureFormatTransformer.svelte';
+  import DiffCompare from './components/tools/DiffCompare.svelte';
   import PlaceholderTool from './components/tools/PlaceholderTool.svelte';
 
   // Import global styles
@@ -37,6 +38,8 @@
       <div class="tool-view"><MarkdownToExcelConverter /></div>
     {:else if activeToolId === 'placeholder-2'}
       <div class="tool-view"><FeatureFormatTransformer /></div>
+    {:else if activeToolId === 'diff-compare'}
+      <div class="tool-view"><DiffCompare /></div>
     {/if}
   </main>
 </div>
